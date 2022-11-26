@@ -9,9 +9,9 @@ const Error = () => {
 
       <section>
 
-	<div class="bg-black text-white">
-		<div class="flex h-screen">
-			<div class="m-auto text-center">
+	<div className="bg-black text-white">
+		<div className="flex h-screen">
+			<div className="m-auto text-center">
 				<div>
 					<svg width="631" height="379" viewBox="0 0 631 379" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g clip-path="url(#clip0)">
@@ -200,7 +200,7 @@ const Error = () => {
   )}
       </div>
 				<a href="/"
-					class="bg-transparent hover:bg-yellow-300 text-yellow-300 hover:text-white rounded shadow hover:shadow-lg py-2 px-4 border border-yellow-300 hover:border-transparent">
+					className="bg-transparent hover:bg-yellow-300 text-yellow-300 hover:text-white rounded shadow hover:shadow-lg py-2 px-4 border border-yellow-300 hover:border-transparent">
 					Retry</a>
 			</div>
 		</div>
