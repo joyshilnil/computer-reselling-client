@@ -54,7 +54,7 @@ const Navbar = () => {
                 BLOG
               </Link>
             </li>
-            {user?.email && 
+            {user?.email && (
               <>
                 <li>
                   <Link to="/addservice" className="font-semibold">
@@ -67,7 +67,7 @@ const Navbar = () => {
                   </Link>
                 </li>
               </>
-            }
+            )}
           </ul>
         </div>
         <div className="navbar-end">

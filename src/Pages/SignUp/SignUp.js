@@ -136,7 +136,7 @@ const SignUp = () => {
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md mb-5"
             >
               <option>User</option>
-              <option>Admin</option>
+              <option>Seller</option>
             </select>
             <label className="text-black dark:text-gray-200">Password</label>
             <input

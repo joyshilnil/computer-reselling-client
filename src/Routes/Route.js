@@ -10,40 +10,43 @@ import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <Main></Main>, 
-        errorElement: <Error></Error>,
-        children: [
-            {
-                path: '/',
-                element: <Home></Home>
-            },
-            {
-                path: '/login',
-                element: <Login></Login>
-            },
-            {
-                path: '/signup',
-                element: <SignUp></SignUp>
-            },
-            {
-                path: '/blog',
-                element: <Blog></Blog>
-            },
-            {
-                path: '/allcategory',
-                element: <AllCategory></AllCategory>
-            },
-            {
-                path: "/categorys/:id",
-                element: <PrivateRoute><CategoryProducts></CategoryProducts></PrivateRoute>,
-                loader: ({ params }) =>
-                  fetch(`http://localhost:5000/categorys/${params.id}`),
-              },
-        ]
-
-    }
-])
+  {
+    path: "/",
+    element: <Main></Main>,
+    errorElement: <Error></Error>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/signup",
+        element: <SignUp></SignUp>,
+      },
+      {
+        path: "/blog",
+        element: <Blog></Blog>,
+      },
+      {
+        path: "/allcategory",
+        element: <AllCategory></AllCategory>,
+      },
+      {
+        path: "/categorys/:id",
+        element: (
+          <PrivateRoute>
+            <CategoryProducts></CategoryProducts>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/categorys/${params.id}`),
+      },
+    ],
+  },
+]);
 
 export default router;
