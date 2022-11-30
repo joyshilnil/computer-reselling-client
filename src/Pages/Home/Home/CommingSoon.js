@@ -53,7 +53,7 @@ const CommingSoon = () => {
               <div className="mt-8 hidden lg:block">
                 <img
                   className=""
-                  src="https://www.pngall.com/wp-content/uploads/2016/05/Laptop.png"
+                  src="https://johnlewis.scene7.com/is/image/JohnLewis/laptop-carousel1-140922"
                   alt=""
                 />
               </div>

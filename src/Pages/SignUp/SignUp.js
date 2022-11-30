@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
+import useToken from "../../hooks/useToken";
 
 const SignUp = () => {
   const {
@@ -12,9 +13,20 @@ const SignUp = () => {
     signInWithGoogle,
   } = useContext(AuthContext);
 
+
   const navigate = useNavigate()
   const location = useLocation()
   const from = location.state?.from?.pathname || '/'
+
+
+
+  const [createdUserEmail, setCreatedUserEmail] = useState('')
+  const [token] = useToken(createdUserEmail);
+
+  if(token){    
+    navigate(from, { replace: true });
+}
+
 
 
 
@@ -46,9 +58,10 @@ const SignUp = () => {
         createUser(email, password)
           .then((result) => {
             updateUserProfile(name, photo)
-              .then(() => {
+              .then(() => {                
+                saveUser(name, email, role);
+                navigate(from, { replace: true });
                 toast.success("User Create Successfuly");
-                navigate(from, {replace: true})
               })
               .catch((err) => console.error(err));
           })
@@ -63,6 +76,26 @@ const SignUp = () => {
       navigate(from, {replace: true})
     });
   };
+
+
+  const saveUser = (name, email, role) =>{
+    const user ={name, email, role};
+    fetch('http://localhost:5000/users', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+    .then(res => res.json())
+    .then(data =>{
+        setCreatedUserEmail(email);
+    })
+}
+
+
+
+
 
   return (
     <div>

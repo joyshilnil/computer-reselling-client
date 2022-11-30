@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
+import useToken from "../../hooks/useToken";
 
 const Login = () => {
 
@@ -10,10 +11,20 @@ const Login = () => {
   const { loading, setLoading, signin, signInWithGoogle, resetPassword } =
     useContext(AuthContext);
 
+
+    const [loginUserEmail, setLoginUserEmail] = useState('');
+    const [token] = useToken(loginUserEmail)
+
+
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
+
+
+  if (token) {
+    navigate(from, { replace: true });
+}
   const handleSubmit = (event) => {
     event.preventDefault();
     const email = event.target.email.value;
@@ -21,8 +32,8 @@ const Login = () => {
 
     signin(email, password)
       .then((result) => {
+        setLoginUserEmail(email);        
         toast.success("Login Successfuly");
-        navigate(from, { replace: true });
       })
       .catch((err) => {
         toast.error(err.message);
