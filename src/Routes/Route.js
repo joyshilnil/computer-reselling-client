@@ -52,7 +52,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/categorys/${params.id}`),
+          fetch(`https://laptop-bysell-server.vercel.app/categorys/${params.id}`),
       },
     ],
   },  

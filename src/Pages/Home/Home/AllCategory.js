@@ -7,7 +7,7 @@ const AllCategory = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/categorys")
+    fetch("https://laptop-bysell-server.vercel.app/categorys")
       .then((res) => res.json())
       .then((data) => {
         setCategorys(data);

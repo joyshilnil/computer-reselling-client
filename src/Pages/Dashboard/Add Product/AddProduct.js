@@ -19,7 +19,7 @@ const AddProduct = () => {
     const { data: specialties, isLoading } = useQuery({
         queryKey: ['specialty'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/categoryname');
+            const res = await fetch('https://laptop-bysell-server.vercel.app/categoryname');
             const data = await res.json();
             return data;
         }
@@ -51,7 +51,7 @@ const AddProduct = () => {
                 }
 
                 // save product to the database
-                fetch(`http://localhost:5000/categorys/${data.specialty}`, {
+                fetch(`https://laptop-bysell-server.vercel.app/categorys/${data.specialty}`, {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',                       
