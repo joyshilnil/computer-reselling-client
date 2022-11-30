@@ -63,6 +63,7 @@ const SignUp = () => {
   };
 
   const handleGoogleSignUp = () => {
+   
     signInWithGoogle().then((result) => {
       toast.success("Sign In Successfuly");
     });

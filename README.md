@@ -4,7 +4,7 @@ This project Client Site [Source Code](https://github.com/programming-hero-web-c
 
 This project Server Site [Source Code](https://github.com/programming-hero-web-course-4/b612-used-products-resale-server-side-joyshilnil).
 
-This project [Live Site Link](https://doctor-1c655.web.app/).
+This project [Live Site Link](https://computer-a7d6e.web.app/).
 
 ***
 Which I have used in this project
