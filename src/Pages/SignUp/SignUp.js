@@ -13,22 +13,16 @@ const SignUp = () => {
     signInWithGoogle,
   } = useContext(AuthContext);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
-  const navigate = useNavigate()
-  const location = useLocation()
-  const from = location.state?.from?.pathname || '/'
-
-
-
-  const [createdUserEmail, setCreatedUserEmail] = useState('')
+  const [createdUserEmail, setCreatedUserEmail] = useState("");
   const [token] = useToken(createdUserEmail);
 
-  if(token){    
+  if (token) {
     navigate(from, { replace: true });
-}
-
-
-
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -38,13 +32,12 @@ const SignUp = () => {
     const password = event.target.password.value;
     const role = event.target.role.value;
 
-
+    const imageHostKey = process.env.REACT_APP_imgbb_key;
 
     const formData = new FormData();
     formData.append("image", image);
 
-    const url =
-      "https://api.imgbb.com/1/upload?key=afef08da1145021193bc600e45747f4f";
+    const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
 
     fetch(url, {
       method: "POST",
@@ -58,10 +51,10 @@ const SignUp = () => {
         createUser(email, password)
           .then((result) => {
             updateUserProfile(name, photo)
-              .then(() => {                
+              .then(() => {
                 saveUser(name, email, role);
-                navigate(from, { replace: true });
                 toast.success("User Create Successfuly");
+                navigate(from, { replace: true });
               })
               .catch((err) => console.error(err));
           })
@@ -72,30 +65,25 @@ const SignUp = () => {
 
   const handleGoogleSignUp = () => {
     signInWithGoogle().then((result) => {
-      toast.success('Sign In Successfuly')
-      navigate(from, {replace: true})
+      toast.success("Sign In Successfuly");
+      navigate(from, { replace: true });
     });
   };
 
-
-  const saveUser = (name, email, role) =>{
-    const user ={name, email, role};
-    fetch('http://localhost:5000/users', {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify(user)
+  const saveUser = (name, email, role) => {
+    const user = { name, email, role };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
     })
-    .then(res => res.json())
-    .then(data =>{
+      .then((res) => res.json())
+      .then((data) => {
         setCreatedUserEmail(email);
-    })
-}
-
-
-
-
+      });
+  };
 
   return (
     <div>

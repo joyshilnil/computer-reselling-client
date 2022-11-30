@@ -15,6 +15,7 @@ import AllUsers from "../Pages/Dashboard/All Users/AllUsers";
 import AdminRoute from "./AdminRoute";
 import SellersRoute from "./SellersRoute";
 import AllSellers from "../Pages/Dashboard/Add Product/AddProduct";
+import AddProduct from "../Pages/Dashboard/Add Product/AddProduct";
 
 const router = createBrowserRouter([
   {
@@ -72,7 +73,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/addproduct",
-        element: <SellersRoute><AllSellers></AllSellers></SellersRoute>
+        element: <SellersRoute><AddProduct></AddProduct></SellersRoute>
       },
 
     ]
