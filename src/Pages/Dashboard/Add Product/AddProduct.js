@@ -1,13 +1,15 @@
 
 
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../Context/AuthProvider';
 import Sppiner from '../../Shared/Sppiner/Sppiner';
 
 const AddProduct = () => {
+  const {user} = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     
     const imageHostKey = process.env.REACT_APP_imgbb_key;
@@ -45,6 +47,7 @@ const AddProduct = () => {
                     resalePrice: data.resalePrice,
                     orginalPrice: data.orginalPrice,
                     used: data.used,
+                    email: data.email,
                 }
 
                 // save product to the database
@@ -75,11 +78,21 @@ const AddProduct = () => {
             <form onSubmit={handleSubmit(handleAddProduct)}>
                 <div className="form-control w-full ">
                     <label className="label"> <span className="label-text">Seller Name</span></label>
-                    <input type="text" {...register("sellerName", {
+                    <input type="text" defaultValue={user?.displayName} readOnly {...register("sellerName", {
                         required: "Name is Required"
                     })} className="input input-bordered w-full " />
                     {errors.sellerName && <p className='text-red-500'>{errors.sellerName.message}</p>}
                 </div>
+
+
+                <div className="form-control w-full">
+                    <label className="label"> <span className="label-text">Email</span></label>
+                    <input type="email" defaultValue={user?.email} readOnly {...register("email", {
+                        required: true
+                    })} className="input input-bordered w-full" />
+                    {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
+                </div>
+
 
 
                 <div className="form-control w-full ">
