@@ -1,7 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import toast from "react-hot-toast";
 
 const AllUsers = () => {
+
+
+
   const { data: users = [] } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -10,6 +14,9 @@ const AllUsers = () => {
       return data;
     },
   });
+
+
+
 
   return (
     <div>
@@ -35,7 +42,7 @@ const AllUsers = () => {
                   <button className="btn btn-xs btn-info">{user?.role}</button>
                 </td>
                 <td>
-                  <button className="btn btn-xs btn-success">Delete</button>
+                  <label className="btn btn-xs btn-success">Delete</label>
                 </td>
               </tr>
             ))}

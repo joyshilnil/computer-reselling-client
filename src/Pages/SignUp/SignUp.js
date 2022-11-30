@@ -54,7 +54,6 @@ const SignUp = () => {
               .then(() => {
                 saveUser(name, email, role);
                 toast.success("User Create Successfuly");
-                navigate(from, { replace: true });
               })
               .catch((err) => console.error(err));
           })
@@ -66,7 +65,6 @@ const SignUp = () => {
   const handleGoogleSignUp = () => {
     signInWithGoogle().then((result) => {
       toast.success("Sign In Successfuly");
-      navigate(from, { replace: true });
     });
   };
 

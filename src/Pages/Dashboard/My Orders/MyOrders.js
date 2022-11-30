@@ -12,9 +12,9 @@ const MyOrders = () => {
     queryFn: async () => {
       const res = await fetch(url, {
         headers: {
-           authorization: `bearer ${localStorage.getItem('accessToken')}` 
-        }
-    });
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
       const data = await res.json();
       return data;
     },
@@ -32,37 +32,42 @@ const MyOrders = () => {
               <th>Status</th>
             </tr>
           </thead>
-          <tbody>
-            { bookings &&
-            bookings?.map((booking, i) => (
-              <tr key={booking._id}>
-                <th>{i+1}</th>
-                <td>
-                  <div className="flex items-center space-x-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle w-12 h-12">
-                        <img
-                          src={booking.picture}
-                          alt="Avatar Tailwind CSS Component"
-                        />
+          
+            {bookings.length > 0 ? (
+             <tbody>
+                {bookings?.map((booking, i) => (
+                  <tr key={booking._id}>
+                    <th>{i + 1}</th>
+                    <td>
+                      <div className="flex items-center space-x-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle w-12 h-12">
+                            <img
+                              src={booking.picture}
+                              alt="Avatar Tailwind CSS Component"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className="font-bold">{booking.productName}</div>
+                        </div>
                       </div>
-                    </div>
-                    <div>
-                      <div className="font-bold">{booking.productName}</div>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <span className="badge badge-ghost badge-sm">
-                    {booking.resaleprice}
-                  </span>
-                </td>
-                <th>
-                  <button className="btn btn-error btn-xs">Pay</button>
-                </th>
-              </tr>
-            ))}
-          </tbody>
+                    </td>
+                    <td>
+                      <span className="badge badge-ghost badge-sm">
+                        {booking.resaleprice}
+                      </span>
+                    </td>
+                    <th>
+                      <button className="btn btn-error btn-xs">Pay</button>
+                    </th>
+                  </tr>
+                ))}
+              </tbody>
+            ) : (
+              <h1>You Have No Orders</h1>
+            )}
+          
         </table>
       </div>
     </div>
