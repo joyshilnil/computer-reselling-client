@@ -6,10 +6,7 @@ This project Server Site [Source Code](https://github.com/programming-hero-web-c
 
 This project [Live Site Link](https://computer-a7d6e.web.app/).
 
-***
-Email: nil@gmail.com
-Password: 123456
-***
+
 Which I have used in this project
 
 1. **I used Tailwind**

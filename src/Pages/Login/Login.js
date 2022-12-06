@@ -8,7 +8,7 @@ const Login = () => {
 
   const [userEmail, setUserEmail] = useState('');
 
-  const { loading, setLoading, signin, signInWithGoogle, resetPassword } =
+  const { setLoading, signin, signInWithGoogle, resetPassword } =
     useContext(AuthContext);
 
 
@@ -34,6 +34,7 @@ const Login = () => {
       .then((result) => {
         setLoginUserEmail(email);        
         toast.success("Login Successfuly");
+        setLoading(false);
       })
       .catch((err) => {
         toast.error(err.message);
@@ -44,6 +45,7 @@ const Login = () => {
   const handleGoogleSignUp = () => {
     signInWithGoogle().then((result) => {
       toast.success("Sign In Successfuly");
+      setLoading(false);
     });
   };
 

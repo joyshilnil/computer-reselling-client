@@ -7,10 +7,9 @@ import useToken from "../../hooks/useToken";
 const SignUp = () => {
   const {
     createUser,
-    loading,
-    setLoading,
     updateUserProfile,
     signInWithGoogle,
+    setLoading,
   } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -23,7 +22,23 @@ const SignUp = () => {
   if (token) {
     navigate(from, { replace: true });
   }
+  const saveUser = (name, email, role) => {
+    const user = { name, email, role };
+    fetch("https://laptop-bysell-server.vercel.app/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCreatedUserEmail(email);
+       setLoading(false);
+      });
+  };
 
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const name = event.target.fullname.value;
@@ -37,6 +52,8 @@ const SignUp = () => {
     const formData = new FormData();
     formData.append("image", image);
 
+
+
     const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
 
     fetch(url, {
@@ -45,7 +62,6 @@ const SignUp = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data.data.display_url);
         const photo = data.data.display_url;
 
         createUser(email, password)
@@ -54,6 +70,8 @@ const SignUp = () => {
               .then(() => {
                 saveUser(name, email, role);
                 toast.success("User Create Successfuly");
+                navigate(from, { replace: true });
+                setLoading(false);
               })
               .catch((err) => console.error(err));
           })
@@ -66,23 +84,10 @@ const SignUp = () => {
    
     signInWithGoogle().then((result) => {
       toast.success("Sign In Successfuly");
+      setLoading(false);
     });
   };
 
-  const saveUser = (name, email, role) => {
-    const user = { name, email, role };
-    fetch("https://laptop-bysell-server.vercel.app/users", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setCreatedUserEmail(email);
-      });
-  };
 
   return (
     <div>
